@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Footer from "./components/Footer";
+import NavigationBar from "./components/NavigationBar";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "@fortawesome/fontawesome-free/css/all.css";
+import MainRoutes from "./routes";
+import { loggedUser } from "./services/services";
+import { Row } from "react-bootstrap";
+import SideMenuComponent from "./components/SideMenuComponent";
+import { theme } from "./utils/labels";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <NavigationBar />
+      {loggedUser ? (
+        <div>
+          <Row>
+            <div className="col-md-3" style={{ backgroundColor: theme.deep }}>
+              <SideMenuComponent />
+            </div>
+            <div className="col-md-9">
+              <MainRoutes />
+            </div>
+          </Row>
+        </div>
+      ) : (
+        <div>
+          <MainRoutes />
+        </div>
+      )}
+      <Footer />
     </div>
   );
 }
